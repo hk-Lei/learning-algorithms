@@ -9,7 +9,8 @@
 
 ### 时间复杂度
 
-冒泡排序最好的时间复杂度为 O(n)，最坏时间复杂度为 O(n^n)。
+一般冒泡排序的时间复杂度为 O(n^n)
+优化后的冒泡排序的最好的时间复杂度为 O(n)，最坏时间复杂度为 O(n^n)。
 
 ### 算法稳定性
 
@@ -19,12 +20,35 @@
 
 #### Java
 
+
 ```java
+/**
+ * 一般的冒泡排序，时间复杂度为 O(n^n)
+ */
 void bubbleSort(int[] array){
     for (int i = 0; i < array.length - 1; i++) {
         int temp;
         for (int j = i + 1; j < array.length; j++) {
             if (array[j] < array[i]) {
+                temp = array[i];
+                array[i] = array[j];
+                array[j] = temp;
+            }
+        }
+    }
+}
+
+/**
+ * 优化版的冒泡排序，时间复杂度最好为 O(n)，最坏为 O(n^n)
+ */
+void bubbleSort2(int[] array){
+    boolean flag = true;
+    for (int i = 0; i < array.length - 1 && flag; i++) {
+        int temp;
+        flag = false;
+        for (int j = i + 1; j < array.length; j++) {
+            if (array[j] < array[i]) {
+                flag = true;
                 temp = array[i];
                 array[i] = array[j];
                 array[j] = temp;
